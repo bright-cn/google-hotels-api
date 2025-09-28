@@ -9,20 +9,20 @@
 
 ## 目录
 - [免费抓取器](#免费抓取器)
-- [设置](#设置)
-- [用法](#用法)
-- [示例输出](#示例输出)
-- [限制](#限制)
+  - [设置](#设置)
+  - [用法](#用法)
+  - [示例输出](#示例输出)
+  - [限制](#限制)
 - [Bright Data 谷歌酒店 API](#bright-data-谷歌酒店-api)
-- [主要特性](#主要特性)
-- [前置条件](#前置条件)
-- [直接调用 API](#直接调用-api)
-- [原生代理接入](#原生代理接入)
+  - [主要特性](#主要特性)
+  - [前置条件](#前置条件)
+  - [直接调用 API](#直接调用-api)
+  - [原生代理接入](#原生代理接入)
 - [高级参数](#高级参数)
-- [本地化参数](#本地化参数)
-- [预订参数](#预订参数)
-- [设备类型参数](#设备类型参数)
-- [响应格式](#响应格式)
+  - [本地化参数](#本地化参数)
+  - [预订参数](#预订参数)
+  - [设备类型参数](#设备类型参数)
+  - [响应格式](#响应格式)
 - [替代方案](#替代方案)
 - [支持与资源](#支持与资源)
 
@@ -92,9 +92,9 @@ python3 google-hotels-scraper.py --location "Dubai" --max_hotels 200
 2. 生成[API 密钥](https://docs.brightdata.com/general/account/api-token)
 3. 按照[分步指南](https://github.com/bright-cn/google-hotels-api/blob/main/setup-serp-api-guide.md)配置 SERP API 与访问凭据
 4. 使用 Google Hotels API 需要查询酒店的 entity ID，获取方法：
-1. 在 Google 中搜索酒店名称
-2. 右键页面并选择“查看网页源代码”
-3. 在源代码中搜索 “/entity” 即可找到 entity ID
+  1. 在 Google 中搜索酒店名称
+  2. 右键页面并选择“查看网页源代码”
+  3. 在源代码中搜索 “/entity” 即可找到 entity ID
 
 ### 直接调用 API
 
@@ -104,13 +104,13 @@ cURL 示例：
 
 ```bash
 curl https://api.brightdata.com/request \
--H "Content-Type: application/json" \
--H "Authorization: Bearer API_TOKEN" \
--d '{
-zone: "ZONE_NAME",
-url: "https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=1",
-format: "raw"
-}'
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer API_TOKEN" \
+  -d '{
+        "zone": "ZONE_NAME",
+        "url": "https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=1",
+        "format": "raw"
+      }'
 ```
 
 Python 示例：
@@ -123,15 +123,15 @@ url = "https://api.brightdata.com/request"
 headers = {"Content-Type": "application/json", "Authorization": "Bearer API_TOKEN"}
 
 payload = {
-zone: "ZONE_NAME",
-url: "https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=1",
-format: "raw",
+    "zone": "ZONE_NAME",
+    "url": "https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=1",
+    "format": "raw",
 }
 
 response = requests.post(url, headers=headers, json=payload)
 
 with open("serp-direct-api.json", "w") as file:
-json.dump(response.json(), file, indent=4)
+    json.dump(response.json(), file, indent=4)
 
 print("Response saved to 'serp-direct-api.json'.")
 ```
@@ -148,10 +148,10 @@ cURL 示例：
 
 ```bash
 curl -i \
---proxy brd.superproxy.io:33335 \
---proxy-user "brd-customer-<customer-id>-zone-<zone-name>:<zone-password>" \
--k \
-https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=html
+  --proxy brd.superproxy.io:33335 \
+  --proxy-user "brd-customer-<customer-id>-zone-<zone-name>:<zone-password>" \
+  -k \
+  "https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=html"
 ```
 
 Python 示例：
@@ -173,7 +173,7 @@ url = "https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?br
 response = requests.get(url, proxies=proxies, verify=False)
 
 with open("serp-native-proxy.html", "w", encoding="utf-8") as file:
-file.write(response.text)
+    file.write(response.text)
 
 print("Response saved to 'serp-native-proxy.html'.")
 ```
@@ -201,7 +201,7 @@ Bright Data 的 API 支持多种高级参数，用于精准优化 Google Hotels 
 
 ```bash
 curl --proxy brd.superproxy.io:33335 --proxy-user brd-customer-<customer-id>-zone-<zone-name>:<zone-password> \
-https://www.google.com/travel/hotels/entity/CgoI4NzJmsPmkpU6EAE/prices?gl=us&hl=en
+"https://www.google.com/travel/hotels/entity/CgoI4NzJmsPmkpU6EAE/prices?gl=us&hl=en"
 ```
 
 ### 预订参数
@@ -222,8 +222,8 @@ https://www.google.com/travel/hotels/entity/CgoI4NzJmsPmkpU6EAE/prices?gl=us&hl=
 
 ```bash
 curl --proxy brd.superproxy.io:33335 \
---proxy-user brd-customer-<customer-id>-zone-<zone-name>:<zone-password> \
-"https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices\
+  --proxy-user brd-customer-<customer-id>-zone-<zone-name>:<zone-password> \
+  "https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices\
 ?brd_dates=2025-04-15,2025-04-20\
 &brd_occupancy=3,6,9\
 &brd_free_cancellation=true\
@@ -246,7 +246,7 @@ curl --proxy brd.superproxy.io:33335 \
 
 ```bash
 curl --proxy brd.superproxy.io:33335 --proxy-user brd-customer-<customer-id>-zone-<zone-name>:<zone-password> \
-https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_mobile=android
+"https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_mobile=android"
 ```
 
 ### 响应格式
@@ -261,7 +261,7 @@ https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_mobil
 
 ```bash
 curl --proxy brd.superproxy.io:33335 --proxy-user brd-customer-<customer-id>-zone-<zone-name>:<zone-password> \
-https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=1
+"https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=1"
 ```
 
 ## 替代方案
@@ -279,15 +279,15 @@ https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=
 
 - 文档：[SERP API 文档](https://docs.brightdata.com/scraping-automation/serp-api/)
 - 相关指南：
-- [Web Unlocker API](https://github.com/bright-cn/web-unlocker-api)
-- [SERP API](https://github.com/bright-cn/serp-api)
-- [Google Search API](https://github.com/bright-cn/google-search-api)
-- [Google News Scraper](https://github.com/bright-cn/Google-News-Scraper)
-- [Google Trends API](https://github.com/bright-cn/google-trends-api)
+  - [Web Unlocker API](https://github.com/bright-cn/web-unlocker-api)
+  - [SERP API](https://github.com/bright-cn/serp-api)
+  - [Google Search API](https://github.com/bright-cn/google-search-api)
+  - [Google News Scraper](https://github.com/bright-cn/Google-News-Scraper)
+  - [Google Trends API](https://github.com/bright-cn/google-trends-api)
 - 实用文章：
-- [最佳 SERP API 盘点](https://www.bright.cn/blog/web-data/best-serp-apis)
-- [用 SERP API 构建 RAG 聊天机器人](https://www.bright.cn/blog/web-data/build-a-rag-chatbot)
+  - [最佳 SERP API 盘点](https://www.bright.cn/blog/web-data/best-serp-apis)
+  - [用 SERP API 构建 RAG 聊天机器人](https://www.bright.cn/blog/web-data/build-a-rag-chatbot)
 - 使用场景：
-- [SEO 应用](https://www.bright.cn/use-cases/serp-tracking)
-- [旅游行业](https://www.bright.cn/use-cases/travel)
+  - [SEO 应用](https://www.bright.cn/use-cases/serp-tracking)
+  - [旅游行业](https://www.bright.cn/use-cases/travel)
 - 联系我们：需要帮助？请发送邮件至 support@brightdata.com
