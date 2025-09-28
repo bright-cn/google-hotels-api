@@ -92,9 +92,9 @@ python3 google-hotels-scraper.py --location "Dubai" --max_hotels 200
 2. 生成你的 [API Key](https://docs.brightdata.com/general/account/api-token)
 3. 按照我们的[分步指南](https://github.com/bright-cn/google-hotels-api/blob/main/setup-serp-api-guide.md)配置 SERP API 和访问凭据
 4. 使用 Google Hotels API 需要你要查询的酒店的 entity ID。查找方式：
-1. 在 Google 中搜索该酒店名称
-2. 右键页面并选择“查看页面源代码”
-3. 在源代码中搜索 “/entity” 即可找到 entity ID
+  1. 在 Google 中搜索该酒店名称
+  2. 右键页面并选择“查看页面源代码”
+  3. 在源代码中搜索 “/entity” 即可找到 entity ID
 
 ### Direct API Access
 
