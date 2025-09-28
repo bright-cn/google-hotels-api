@@ -5,35 +5,33 @@
 学习如何从 Google（全球最大的旅行数据聚合平台之一）抓取实时酒店数据。本文涵盖两种方式：
 
 1. 免费抓取器：适合小规模需求
-2. Bright Data Google Hotels API：企业级方案，基于单次 API 调用即可大规模采集公开的 Google Hotels 数据（隶属 [SERP Scraping API](https://www.bright.cn/products/serp-api)）
+2. Bright Data 谷歌酒店 API：企业级方案，基于单次 API 调用即可大规模采集公开的 Google Hotels 数据（隶属 [SERP Scraping API](https://www.bright.cn/products/serp-api)）
 
 ## 目录
-- [免费抓取器](#free-scraper)
-- [设置](#setup)
-- [用法](#usage)
-- [示例输出](#sample-output)
-- [限制](#limitations)
-- [Bright Data 谷歌酒店 API](#bright-data-google-hotels-api)
-- [主要特性](#key-features)
-- [前置条件](#prerequisites)
-- [直接调用 API](#direct-api-access)
-- [原生代理接入](#native-proxy-based-access)
-- [高级参数](#advanced-features)
-- [本地化参数](#localization-parameters)
-- [预订参数](#booking-parameters)
-- [设备类型参数](#device-type-parameters)
-- [响应格式](#response-format)
-- [替代方案](#alternative-solutions)
-- [支持与资源](#support--resources)
+- [免费抓取器](#免费抓取器)
+- [设置](#设置)
+- [用法](#用法)
+- [示例输出](#示例输出)
+- [限制](#限制)
+- [Bright Data 谷歌酒店 API](#bright-data-谷歌酒店-api)
+- [主要特性](#主要特性)
+- [前置条件](#前置条件)
+- [直接调用 API](#直接调用-api)
+- [原生代理接入](#原生代理接入)
+- [高级参数](#高级参数)
+- [本地化参数](#本地化参数)
+- [预订参数](#预订参数)
+- [设备类型参数](#设备类型参数)
+- [响应格式](#响应格式)
+- [替代方案](#替代方案)
+- [支持与资源](#支持与资源)
 
-<a id="free-scraper"></a>
 ## 免费抓取器
 
 一款快速易用的抓取器，用于小规模提取 Google Hotels 数据。
 
 <img width="800" alt="免费谷歌酒店抓取器" src="https://github.com/bright-cn/google-hotels-api/blob/main/images/421713152-9e86aabe-c8b7-4286-946a-378cd98c81b3.png" />
 
-<a id="setup"></a>
 ### 设置
 
 要求：
@@ -51,7 +49,6 @@ pip install pandas tqdm selenium beautifulsoup4 webdriver-manager
 
 注意：如果您是爬虫新手，建议先阅读我们的[Python 爬虫入门教程](https://www.bright.cn/blog/how-tos/web-scraping-with-python)或[使用 Selenium 进行网页抓取指南](https://www.bright.cn/blog/how-tos/using-selenium-for-web-scraping)。
 
-<a id="usage"></a>
 ### 用法
 使用所需参数运行 [google-hotels-scraper.py](https://github.com/bright-cn/google-hotels-api/blob/main/google-hotels-scraper/google-hotels-scraper.py) 脚本：
 ```bash
@@ -63,11 +60,9 @@ python3 google-hotels-scraper.py --location "Dubai" --max_hotels 200
 
 小提示：为降低被 Google 反爬系统识别的概率，可注释掉脚本中的 `options.add_argument("--headless=new")` 这一行。
 
-<a id="sample-output"></a>
 ### 示例输出
 <img width="800" alt="谷歌酒店抓取器 CSV 输出" src="https://github.com/bright-cn/google-hotels-api/blob/main/images/421731827-633afbf9-204e-444a-ac0f-23b8b72c5813.png" />
 
-<a id="limitations"></a>
 ### 限制
 
 免费抓取器存在以下限制：
@@ -79,11 +74,9 @@ python3 google-hotels-scraper.py --location "Dubai" --max_hotels 200
 
 如需更大规模、更稳定的数据采集，请参考下方的官方解决方案 👇
 
-<a id="bright-data-google-hotels-api"></a>
 ## Bright Data 谷歌酒店 API
 [Bright Data 的 Google Hotels API](https://www.bright.cn/products/serp-api/google-search/hotels) 属于 [SERP Scraping API](https://www.bright.cn/products/serp-api) 组件，基于我们先进的[代理网络](https://www.bright.cn/proxy-types)。无需担心验证码或 IP 封禁，即可大规模采集公开的 Google Hotels 数据。
 
-<a id="key-features"></a>
 ### 主要特性
 - 全球定位精准：可按指定位置定制结果
 - 成功计费模式：仅对成功请求计费
@@ -93,7 +86,6 @@ python3 google-hotels-scraper.py --location "Dubai" --max_hotels 200
 - 高可靠性：内置防封策略，表现稳定
 - 7x24 支持：随时获得专家协助
 
-<a id="prerequisites"></a>
 ### 前置条件
 
 1. 创建一个 [Bright Data 账号](https://www.bright.cn/)（新用户赠送 $5 额度）
@@ -104,7 +96,6 @@ python3 google-hotels-scraper.py --location "Dubai" --max_hotels 200
 2. 右键页面并选择“查看网页源代码”
 3. 在源代码中搜索 “/entity” 即可找到 entity ID
 
-<a id="direct-api-access"></a>
 ### 直接调用 API
 
 向 API 端点发起请求。
@@ -149,7 +140,6 @@ print("Response saved to 'serp-direct-api.json'.")
 
 注意：使用 `brd_json=1` 返回解析后的 JSON；使用 `brd_json=html` 返回“解析后的 JSON + 完整嵌套 HTML”。
 
-<a id="native-proxy-based-access"></a>
 ### 原生代理接入
 
 也可使用 Bright Data 的代理路由方式：
@@ -192,12 +182,10 @@ print("Response saved to 'serp-native-proxy.html'.")
 
 注意：生产环境请按[SSL 证书指南](https://docs.brightdata.com/general/account/ssl-certificate)加载 Bright Data 的 SSL 证书。
 
-<a id="advanced-features"></a>
 ## 高级参数
 
 Bright Data 的 API 支持多种高级参数，用于精准优化 Google Hotels 数据的抓取。以下示例基于“原生代理接入”，同样适用于“直接调用 API”。
 
-<a id="localization-parameters"></a>
 ### 本地化参数
 
 <img width="800" alt="Bright Data 谷歌酒店 API 本地化参数" src="https://github.com/bright-cn/google-hotels-api/blob/main/images/422299775-d47254c1-0c7f-4572-bf54-f3f55cf66908.png" />
@@ -216,7 +204,6 @@ curl --proxy brd.superproxy.io:33335 --proxy-user brd-customer-<customer-id>-zon
 https://www.google.com/travel/hotels/entity/CgoI4NzJmsPmkpU6EAE/prices?gl=us&hl=en
 ```
 
-<a id="booking-parameters"></a>
 ### 预订参数
 
 <img width="800" alt="Bright Data 谷歌酒店 API 预订参数" src="https://github.com/bright-cn/google-hotels-api/blob/main/images/422303757-74faadf7-218b-4fa3-b2d9-d0cecf8e23e6.png" />
@@ -243,7 +230,6 @@ curl --proxy brd.superproxy.io:33335 \
 &brd_currency=GBP"
 ```
 
-<a id="device-type-parameters"></a>
 ### 设备类型参数
 默认使用桌面端 UA（User-Agent），也可切换为移动端：
 
@@ -263,7 +249,6 @@ curl --proxy brd.superproxy.io:33335 --proxy-user brd-customer-<customer-id>-zon
 https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_mobile=android
 ```
 
-<a id="response-format"></a>
 ### 响应格式
 默认返回 HTML，可按需请求 JSON：
 
@@ -279,7 +264,6 @@ curl --proxy brd.superproxy.io:33335 --proxy-user brd-customer-<customer-id>-zon
 https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=1
 ```
 
-<a id="alternative-solutions"></a>
 ## 替代方案
 
 除[Web Scraper APIs](https://www.bright.cn/products/web-scraper) 外，Bright Data 还提供面向旅游行业的即用型[数据集](https://www.bright.cn/products/datasets)：
@@ -291,7 +275,6 @@ https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=
 - [Booking.com 数据集](https://www.bright.cn/products/datasets/booking)
 - [TripAdvisor 数据集](https://www.bright.cn/products/datasets/tripadvisor)
 
-<a id="support--resources"></a>
 ## 支持与资源
 
 - 文档：[SERP API 文档](https://docs.brightdata.com/scraping-automation/serp-api/)
@@ -308,5 +291,3 @@ https://www.google.com/travel/hotels/entity/CgoIyNaqqL33x5ovEAE/prices?brd_json=
 - [SEO 应用](https://www.bright.cn/use-cases/serp-tracking)
 - [旅游行业](https://www.bright.cn/use-cases/travel)
 - 联系我们：需要帮助？请发送邮件至 support@brightdata.com
-
-备注：为确保目录内链在各类渲染器中稳定可用，本文在每个中文标题前添加了显式锚点（如 `<a id="free-scraper"></a>`）。如果您更希望使用中文锚（例如 `#免费抓取器`），我也可以改为本地化锚点版本。
